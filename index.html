@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zack Visuals — Luxury Creative Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:#0b0b0b;
+  color:#f5f5f7;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(60% 40% at 20% 10%, rgba(255,215,140,.15), transparent 60%),
+    radial-gradient(40% 30% at 80% 40%, rgba(140,160,255,.12), transparent 60%),
+    radial-gradient(50% 40% at 50% 90%, rgba(140,255,220,.10), transparent 60%);
+  filter:blur(120px);
+  z-index:-1;
+}
+
+/* CURSOR GLOW */
+.cursor{
+  position:fixed;
+  width:240px;
+  height:240px;
+  background:radial-gradient(circle, rgba(255,255,255,.12), transparent 60%);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:0;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:22px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  backdrop-filter:blur(20px);
+  background:rgba(10,10,10,.6);
+  z-index:10;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+}
+.logo span{
+  background:linear-gradient(135deg,#e6c77b,#fff1c1);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+nav a{
+  margin-left:24px;
+  font-size:13px;
+  color:#cfcfcf;
+  text-decoration:none;
+}
+nav a:hover{color:#fff}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:160px 28px;
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:58px;
+  line-height:1.05;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,#e6c77b,#fff1c1);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  margin:32px 0 48px;
+  max-width:520px;
+  color:#bfbfbf;
+  line-height:1.7;
+}
+.cta{
+  width:fit-content;
+  padding:16px 42px;
+  border-radius:999px;
+  background:#fff;
+  color:#000;
+  font-size:13px;
+  letter-spacing:1px;
+  text-decoration:none;
+}
+
+/* SECTIONS */
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:140px 28px;
+}
+h2{
+  font-family:'Playfair Display',serif;
+  font-size:40px;
+  margin-bottom:24px;
+}
+section p{
+  max-width:620px;
+  color:#c7c7c7;
+  line-height:1.8;
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* SERVICES */
+.services{
+  margin-top:90px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+.card{
+  padding:48px 36px;
+  border-radius:32px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(255,255,255,.08);
+  transition:.6s cubic-bezier(.2,.8,.2,1);
+}
+.card:hover{
+  transform:translateY(-14px);
+}
+.icon{
+  width:68px;
+  height:68px;
+  border-radius:22px;
+  margin-bottom:28px;
+  position:relative;
+}
+.icon::after{
+  content:"";
+  position:absolute;
+  inset:-14px;
+  background:inherit;
+  filter:blur(30px);
+  opacity:.6;
+}
+.gold{background:linear-gradient(135deg,#e6c77b,#fff1c1)}
+.blue{background:linear-gradient(135deg,#9bb6ff,#e6edff)}
+.green{background:linear-gradient(135deg,#9bffd9,#e6fff5)}
+
+/* PORTFOLIO */
+.grid{
+  margin-top:80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+.work{
+  height:260px;
+  border-radius:26px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.6s cubic-bezier(.2,.8,.2,1);
+  text-decoration:none;
+  color:#fff;
+}
+.work:hover{
+  transform:translateY(-10px) scale(1.02);
+}
+.work::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle, rgba(255,255,255,.18), transparent 60%);
+  opacity:0;
+  transition:.6s;
+}
+.work:hover::before{opacity:1}
+.luxury{background:linear-gradient(135deg,#2b1e14,#0f0b08)}
+.cinematic{background:linear-gradient(135deg,#141820,#0a0c12)}
+.minimal{background:linear-gradient(135deg,#1a1a1a,#0d0d0d)}
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:26px;
+  background:linear-gradient(to top, rgba(0,0,0,.65), transparent 60%);
+}
+.overlay h3{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+}
+.overlay span{
+  font-size:12px;
+  letter-spacing:1px;
+  color:#d1d1d1;
+}
+
+/* FOOTER */
+footer{
+  padding:60px 20px;
+  text-align:center;
+  color:#777;
+  font-size:12px;
+}
+
+@media(max-width:768px){
+  .hero h1{font-size:40px}
+  section{padding:100px 22px}
+}
+</style>
+</head>
+
+<body>
+<div class="bg"></div>
+<div class="cursor"></div>
+
+<nav>
+  <div class="logo">Zack <span>Visuals</span></div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero reveal">
+  <h1>Designing calm, <span>luxurious</span><br>visual experiences</h1>
+  <p>High-end branding, visual design and creative direction built with precision.</p>
+  <a class="cta" href="#contact">Start a Project</a>
+</section>
+
+<section id="about" class="reveal">
+  <h2>About</h2>
+  <p>Zack Visuals is a creative studio focused on luxury branding, modern visuals and cinematic design.</p>
+</section>
+
+<section id="services" class="reveal">
+  <h2>Services</h2>
+  <div class="services">
+    <div class="card"><div class="icon gold"></div><h3>Brand Identity</h3><p>Luxury logos & systems.</p></div>
+    <div class="card"><div class="icon blue"></div><h3>Visual Direction</h3><p>Cinematic design language.</p></div>
+    <div class="card"><div class="icon green"></div><h3>Design & Graphics</h3><p>High-end visuals.</p></div>
+  </div>
+</section>
+
+<section id="work" class="reveal">
+  <h2>Selected Work</h2>
+  <div class="grid">
+
+    <a href="https://drive.google.com/file/d/1X4PhPJ4bwvoylFvKlWLW6x_MZLpHKPty/view"
+       target="_blank" class="work luxury">
+      <div class="overlay">
+        <h3>Luxury Visual Project</h3>
+        <span>Branding & Design</span>
+      </div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1BhJCgq-gV4upWyQStkdsWNwifOjz1YmR/view"
+       target="_blank" class="work cinematic">
+      <div class="overlay">
+        <h3>Cinematic Concept</h3>
+        <span>Creative Direction</span>
+      </div>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1qCbQM9xxMeKG_FSx7WwM-ReIHLKOr4Os/view"
+       target="_blank" class="work minimal">
+      <div class="overlay">
+        <h3>Minimal Design Study</h3>
+        <span>High-End Visuals</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <h2>Let’s work together</h2>
+  <p>If you value refined, calm and luxurious design — let’s talk.</p>
+  <a class="cta" href="mailto:contact@zackvisuals.com">Contact Me</a>
+</section>
+
+<footer>
+© 2026 Zack Visuals — Designed with intention
+</footer>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+},{threshold:.2});
+reveals.forEach(r=>obs.observe(r));
+
+const cursor=document.querySelector('.cursor');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
+});
+</script>
+
+</body>
+</html>
